@@ -55,9 +55,14 @@ the graphic library needed for the three rank 2 graphical project (so_long, FdF,
 ```c
 so_long/
 ├── src/
-├── include/
+├── include/┌ ft_printf.h
+│           ├ libft.h
+│           └ so_long.h
 ├── assets/
 ├── maps/
+├── lib/┌ minilibx-linux/
+│       ├ libft/
+│       └ ft_printf/
 ├── Makefile
 └── main.c
 ```
