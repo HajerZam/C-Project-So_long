@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 13:54:16 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:16:19 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:07:55 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

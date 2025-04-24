@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 19:40:42 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:05:10 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:05:05 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 char	*ft_strtrim(char const *s1, char const *set)
 {

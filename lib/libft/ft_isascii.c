@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:01:08 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:17:44 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:07:20 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 int	ft_isascii(int c)
 {

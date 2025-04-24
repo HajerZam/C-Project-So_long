@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:25:11 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:07:17 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:04:17 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {

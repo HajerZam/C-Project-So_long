@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:08:05 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:17:15 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:07:31 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 int	ft_isprint(int c)
 {

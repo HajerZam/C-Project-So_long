@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:29:13 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:08:09 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:03:54 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 static char	**free_arr(char **ptr, int i)
 {

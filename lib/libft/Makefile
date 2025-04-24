@@ -1,6 +1,6 @@
 CC       = gcc
 AR       = ar
-CFLAGS   = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I../../include
 
 NAME     = libft.a
 SRCS     = \

@@ -32,6 +32,8 @@ PRINTF_DIR		= $(LIB_DIR)/ft_printf
 # -----------------------------------------------------------------------------
 
 SRCS			= $(wildcard $(SRC_DIR)/*.c) main.c
+GNL_SRCS = lib/GNL/get_next_line.c lib/GNL/get_next_line_utils.c
+GNL_OBJS = $(GNL_SRCS:.c=.o)
 OBJS			= $(SRCS:.c=.o)
 
 # -----------------------------------------------------------------------------
@@ -50,8 +52,9 @@ LIBS			= -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf
 
 all: $(NAME)
 
-$(NAME): libft printf mlx $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) $(LIBS) -o $(NAME)
+$(NAME): libft printf mlx $(OBJS) $(GNL_OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(GNL_OBJS) $(MLX_FLAGS) $(LIBS) -o $(NAME)
+	@echo "\033[0;35m$(NAME) compiled successfully!\033[0m"
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

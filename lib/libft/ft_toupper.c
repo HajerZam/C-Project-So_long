@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:44:52 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:03:34 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:05:27 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 int	ft_toupper(int c)
 {

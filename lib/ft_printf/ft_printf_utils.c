@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:29:35 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:20:53 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:12:48 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 void	ft_putchar(char c, int *count)
 {

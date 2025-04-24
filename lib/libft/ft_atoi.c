@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:01:44 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:19:00 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:06:45 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {

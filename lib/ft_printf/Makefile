@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I../../include
 INCLUDE_DIR = include
 
 SRC = ft_printf.c ft_printf_utils.c

@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 14:37:51 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:17:02 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:07:37 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 static int	count_digits(int nb)
 {

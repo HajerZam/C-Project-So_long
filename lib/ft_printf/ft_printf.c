@@ -6,11 +6,11 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 14:31:07 by halzamma          #+#    #+#             */
-/*   Updated: 2025/03/06 13:21:13 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:12:41 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 void	ft_print_ptr(unsigned long ptr, int *count)
 {
