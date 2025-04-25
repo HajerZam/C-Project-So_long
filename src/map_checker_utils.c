@@ -14,38 +14,62 @@
 
 void	remove_newline(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] && line[i] != '\n')
 		i++;
-	line[i] = '\0';
+	if (i > 0 && line[i - 1] == '\r')
+		line[i - 1] = '\0';
+	else
+		line[i] = '\0';
+}
+
+void	error(char *msg)
+{
+	ft_printf("\033[1;35mERROR: %s\033[0m\n", msg);
+	exit(1);
+}
+
+int	get_next_line_and_append(int fd, char ***map, int *h, int *w)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	if (!line)
+		return (0);
+	remove_newline(line);
+	if (!append_line_to_map(map, line, h, w))
+	{
+		free(line);
+		return (0);
+	}
+	free(line);
+	return (1);
 }
 
 int	read_map_lines(int fd, char ***out_map, int *width, int *height)
 {
-	char	*line;
 	char	**map;
 	int		h;
 	int		w;
 
 	map = NULL;
-	w = -1;
 	h = 0;
-	while ((line = get_next_line(fd)))
-	{
-		remove_newline(line);
-		if (!append_line_to_map(&map, line, &h, &w))
-		{
-			free(line);
-			return (0);
-		}
-		free(line);
-	}
+	w = -1;
+	while (get_next_line_and_append(fd, &map, &h, &w))
+		;
 	if (h == 0)
-		return (perror("Empty map file!! >:( you take me for a fool, wizard!"), 0);
+		error("Empty map file!! >:( you take me for a fool, wizard!");
 	*out_map = map;
 	*width = w;
 	*height = h;
 	return (1);
+}
+
+int	is_valid_char(char c)
+{
+	if (c == '1' || c == '0' || c == 'C' || c == 'E' || c == 'P')
+		return (1);
+	return (0);
 }

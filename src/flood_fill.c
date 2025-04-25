@@ -22,12 +22,17 @@ void	free_visited(int **visited, int height)
 	free(visited);
 }
 
-void flood_fill(char **map, int **visited, t_point pos, t_point size)
+void	flood_fill(char **map, int **visited, t_point pos, t_point size)
 {
-	if (pos.x < 0 || pos.y < 0 || pos.x >= size.x || pos.y >= size.y || 
-		visited[pos.y][pos.x] == 1 || map[pos.y][pos.x] == '1')
+	if (pos.x < 0 || pos.y < 0)
+		return ;
+	if (pos.x >= size.x || pos.y >= size.y)
+		return ;
+	if (visited[pos.y][pos.x] == 1 || map[pos.y][pos.x] == '1')
 		return ;
 	visited[pos.y][pos.x] = 1;
+	if (map[pos.y][pos.x] == 'E')
+		return ;
 	flood_fill(map, visited, (t_point){pos.x + 1, pos.y}, size);
 	flood_fill(map, visited, (t_point){pos.x - 1, pos.y}, size);
 	flood_fill(map, visited, (t_point){pos.x, pos.y + 1}, size);
@@ -38,7 +43,7 @@ int	check_reachable(char **map, int **visited, int height, int width)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (i < height)
 	{
