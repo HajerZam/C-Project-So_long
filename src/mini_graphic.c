@@ -6,7 +6,7 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:04:08 by halzamma          #+#    #+#             */
-/*   Updated: 2025/04/25 15:04:08 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/26 13:35:05 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	load_images(t_game *game)
 	int	w;
 	int	h;
 
-	game->img_floor = mlx_xpm_file_to_image(game->mlx, "../assets/floor.xpm", &w, &h);
-	game->img_wall = mlx_xpm_file_to_image(game->mlx, "../assets/wall.xpm", &w, &h);
-	game->img_player = mlx_xpm_file_to_image(game->mlx, "../assets/player.xpm", &w, &h);
-	game->img_exit = mlx_xpm_file_to_image(game->mlx, "../assets/exit.xpm", &w, &h);
-	game->img_collectible = mlx_xpm_file_to_image(game->mlx, "../assets/star.xpm", &w, &h);
+	game->img_floor = mlx_xpm_file_to_image(game->mlx, "./assets/floor.xpm", &w, &h);
+	game->img_wall = mlx_xpm_file_to_image(game->mlx, "./assets/wall.xpm", &w, &h);
+	game->img_player = mlx_xpm_file_to_image(game->mlx, "./assets/player.xpm", &w, &h);
+	game->img_exit = mlx_xpm_file_to_image(game->mlx, "./assets/exit.xpm", &w, &h);
+	game->img_collectible = mlx_xpm_file_to_image(game->mlx, "./assets/star.xpm", &w, &h);
 }
 
 void	free_images(t_game *game)
