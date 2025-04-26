@@ -50,18 +50,26 @@ typedef struct s_maplist
 	int		width;
 }	t_maplist;
 
-typedef struct s_game
-{
+typedef struct s_game {
 	void	*mlx;
 	void	*win;
 	void	*img_floor;
 	void	*img_wall;
 	void	*img_player;
+	void	*img_player_up;
+	void	*img_player_down;
+	void	*img_player_left;
+	void	*img_player_right;
 	void	*img_exit;
 	void	*img_collectible;
 	char	**map;
 	int		width;
 	int		height;
+	int		player_x;
+	int		player_y;
+	int		move_count;
+	int		collected;
+	int		total_collectibles;
 }	t_game;
 
 char		*get_next_line(int fd);
@@ -89,6 +97,12 @@ t_row		*create_row(char *line, int expected_width);
 void		append_row_to_map(t_maplist *map, t_row *new, t_row **last);
 int			validate_loaded_map(char **map, int height, int width);
 int			is_valid_char(char c);
+void		find_player_position(t_game *game);
+void		count_collectibles(t_game *game);
+int			handle_keypress(int keycode, t_game *game);
+void		move_player(t_game *game, int dx, int dy);
+void		close_game(t_game *game);
+
 
 
 #endif

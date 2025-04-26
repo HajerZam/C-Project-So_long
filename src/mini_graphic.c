@@ -6,7 +6,7 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:04:08 by halzamma          #+#    #+#             */
-/*   Updated: 2025/04/26 13:35:05 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/26 17:25:36 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,16 @@ void	load_images(t_game *game)
 {
 	int	w;
 	int	h;
-
+	
 	game->img_floor = mlx_xpm_file_to_image(game->mlx, "./assets/floor.xpm", &w, &h);
 	game->img_wall = mlx_xpm_file_to_image(game->mlx, "./assets/wall.xpm", &w, &h);
-	game->img_player = mlx_xpm_file_to_image(game->mlx, "./assets/player.xpm", &w, &h);
+	game->img_player_down = mlx_xpm_file_to_image(game->mlx, "./assets/player.xpm", &w, &h);
+	game->img_player_up = mlx_xpm_file_to_image(game->mlx, "./assets/player_up.xpm", &w, &h);
+	game->img_player_left = mlx_xpm_file_to_image(game->mlx, "./assets/player_l.xpm", &w, &h);
+	game->img_player_right = mlx_xpm_file_to_image(game->mlx, "./assets/player_r.xpm", &w, &h);
 	game->img_exit = mlx_xpm_file_to_image(game->mlx, "./assets/exit.xpm", &w, &h);
 	game->img_collectible = mlx_xpm_file_to_image(game->mlx, "./assets/star.xpm", &w, &h);
+	game->img_player = game->img_player_down; // Default facing down	
 }
 
 void	free_images(t_game *game)
@@ -91,10 +95,14 @@ void	start_game(char **map, int height, int width)
 	game.map = map;
 	game.width = width;
 	game.height = height;
+	game.move_count = 0;
 	load_images(&game);
 	ft_printf("images loaded\n");
+	find_player_position(&game);
+	count_collectibles(&game);
 	render_map(&game);
 	ft_printf("map rendered\n");
+	mlx_key_hook(game.win, handle_keypress, &game);
 	mlx_loop(game.mlx);
 	ft_printf("mlx loop started\n");
 	free_images(&game);
