@@ -14,11 +14,10 @@
 
 void	count_collectibles(t_game *game)
 {
-	int count;
-	int x;
-	int y;
+	int	y;
+	int	x;
 
-	count = 0;
+	game->total_collectibles = 0;
 	y = 0;
 	while (y < game->height)
 	{
@@ -26,10 +25,10 @@ void	count_collectibles(t_game *game)
 		while (x < game->width)
 		{
 			if (game->map[y][x] == 'C')
-				count++;
+				game->total_collectibles++;
+			x++;
 		}
+		y++;
 	}
-	game->total_collectibles = count;
 	game->collected = 0;
 }
-

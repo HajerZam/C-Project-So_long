@@ -14,50 +14,31 @@
 
 int	handle_keypress(int keycode, t_game *game)
 {
-	if (keycode == 65307) // ESC key (Linux X11)
-		close_game(game);
-	if (keycode == 'w')
+	if (keycode == 65307) // ESC
+		return (close_game(game));
+	else if (keycode == 'w' || keycode == 119)
 	{
-		move_player(game, 0, -1);
 		game->img_player = game->img_player_up;
-	}
-	else if (keycode == 'a')
-	{
-		move_player(game, -1, 0);
-		game->img_player = game->img_player_left;
-	}
-	else if (keycode == 's')
-	{
-		move_player(game, 0, 1);
-		game->img_player = game->img_player_down;
-	}
-	else if (keycode == 'd')
-	{
-		move_player(game, 1, 0);
-		game->img_player = game->img_player_right;
-	}
-	else if (keycode == 65361)
-	{
-		move_player(game, -1, 0);
-		game->img_player = game->img_player_left;
-	}
-	else if (keycode == 65362)
-	{
 		move_player(game, 0, -1);
+	}
+	else if (keycode == 'a' || keycode == 97)
+	{
 		game->img_player = game->img_player_left;
+		move_player(game, -1, 0);
 	}
-	else if (keycode == 65363)
+	else if (keycode == 's' || keycode == 115)
 	{
-		move_player(game, 1, 0);
-		game->img_player = game->img_player_right;
-	}
-	else if (keycode == 65364)
-	{
-		move_player(game, 0, 1);
 		game->img_player = game->img_player_down;
+		move_player(game, 0, 1);
+	}
+	else if (keycode == 'd' || keycode == 100)
+	{
+		game->img_player = game->img_player_right;
+		move_player(game, 1, 0);
 	}
 	return (0);
 }
+
 void	find_player_position(t_game *game)
 {
 	int x;
@@ -98,10 +79,14 @@ void	move_player(t_game *game, int dx, int dy)
 	{
 		if (game->collected == game->total_collectibles)
 		{
-			ft_printf("\033[32mYou win!\033[0m\n");
+			ft_printf("\033[32mYOU MADE IT WIZAAARD!\033[0m\n");
 			close_game(game);
 		}
-		return ;
+		else
+		{
+			ft_printf("\033[31mYOU NEED TO COLLECT ALL THE STARS FIRST, KITTYYY!\033[0m\n");
+			return ;
+		}
 	}
 	game->map[game->player_y][game->player_x] = '0';
 	game->player_x = new_x;
@@ -112,9 +97,11 @@ void	move_player(t_game *game, int dx, int dy)
 	render_map(game);
 }
 
-void	close_game(t_game *game)
+int	close_game(t_game *game)
 {
 	free_images(game);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);
+
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:04:08 by halzamma          #+#    #+#             */
-/*   Updated: 2025/04/26 17:25:36 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/04/26 22:36:59 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,12 @@ void	start_game(char **map, int height, int width)
 	game.move_count = 0;
 	load_images(&game);
 	ft_printf("images loaded\n");
+	render_map(&game);
 	find_player_position(&game);
 	count_collectibles(&game);
-	render_map(&game);
 	ft_printf("map rendered\n");
 	mlx_key_hook(game.win, handle_keypress, &game);
+	mlx_hook(game.win, 17, 0, close_game, &game);
 	mlx_loop(game.mlx);
 	ft_printf("mlx loop started\n");
 	free_images(&game);

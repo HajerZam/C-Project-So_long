@@ -101,7 +101,7 @@ void		find_player_position(t_game *game);
 void		count_collectibles(t_game *game);
 int			handle_keypress(int keycode, t_game *game);
 void		move_player(t_game *game, int dx, int dy);
-void		close_game(t_game *game);
+int			close_game(t_game *game);
 
 
 
