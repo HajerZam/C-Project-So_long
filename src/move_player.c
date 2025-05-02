@@ -12,37 +12,10 @@
 
 #include "so_long.h"
 
-int	handle_keypress(int keycode, t_game *game)
-{
-	if (keycode == 65307) // ESC
-		return (close_game(game));
-	else if (keycode == 'w' || keycode == 119)
-	{
-		game->img_player = game->img_player_up;
-		move_player(game, 0, -1);
-	}
-	else if (keycode == 'a' || keycode == 97)
-	{
-		game->img_player = game->img_player_left;
-		move_player(game, -1, 0);
-	}
-	else if (keycode == 's' || keycode == 115)
-	{
-		game->img_player = game->img_player_down;
-		move_player(game, 0, 1);
-	}
-	else if (keycode == 'd' || keycode == 100)
-	{
-		game->img_player = game->img_player_right;
-		move_player(game, 1, 0);
-	}
-	return (0);
-}
-
 void	find_player_position(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < game->height)
@@ -62,20 +35,31 @@ void	find_player_position(t_game *game)
 	}
 }
 
-void	move_player(t_game *game, int dx, int dy)
+void	update_player_direction(t_game *game, int dx, int dy)
 {
-	int	new_x = game->player_x + dx;
-	int	new_y = game->player_y + dy;
-	char	dest = game->map[new_y][new_x];
+	if (dx == 1)
+		game->img_player = game->img_player_right;
+	else if (dx == -1)
+		game->img_player = game->img_player_left;
+	else if (dy == 1)
+		game->img_player = game->img_player_down;
+	else if (dy == -1)
+		game->img_player = game->img_player_up;
+}
 
-	if (dest == '1') // Wall
-		return ;
+int	handle_player_destination(t_game *game, int new_x, int new_y)
+{
+	char	dest;
+
+	dest = game->map[new_y][new_x];
+	if (dest == '1')
+		return (0);
 	if (dest == 'C')
 	{
 		game->collected++;
 		game->map[new_y][new_x] = '0';
 	}
-	if (dest == 'E')
+	else if (dest == 'E')
 	{
 		if (game->collected == game->total_collectibles)
 		{
@@ -84,10 +68,15 @@ void	move_player(t_game *game, int dx, int dy)
 		}
 		else
 		{
-			ft_printf("\033[31mYOU NEED TO COLLECT ALL THE STARS FIRST, KITTYYY!\033[0m\n");
-			return ;
+			ft_printf("\033[1;35mCOLLECT ALL THE STARS, KITTY!\033[0m\n");
+			return (0);
 		}
 	}
+	return (1);
+}
+
+void	finalize_player_move(t_game *game, int new_x, int new_y)
+{
 	game->map[game->player_y][game->player_x] = '0';
 	game->player_x = new_x;
 	game->player_y = new_y;
@@ -97,11 +86,15 @@ void	move_player(t_game *game, int dx, int dy)
 	render_map(game);
 }
 
-int	close_game(t_game *game)
+void	move_player(t_game *game, int dx, int dy)
 {
-	free_images(game);
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
+	int	new_x;
+	int	new_y;
 
-	return (0);
+	new_x = game->player_x + dx;
+	new_y = game->player_y + dy;
+	update_player_direction(game, dx, dy);
+	if (!handle_player_destination(game, new_x, new_y))
+		return ;
+	finalize_player_move(game, new_x, new_y);
 }

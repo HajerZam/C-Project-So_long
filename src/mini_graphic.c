@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_graphic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: halzamma <halzamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:04:08 by halzamma          #+#    #+#             */
-/*   Updated: 2025/04/26 22:36:59 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/05/02 18:24:13 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,19 @@
 
 void	render_map(t_game *game)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
+	char	tile;
+	void	*img;
 
 	y = 0;
-	for (int i = 0; i < game->height; i++)
-			ft_printf("Row %d length: %lu\n", i, ft_strlen(game->map[i]));
-	if (!game->img_floor) ft_printf("❌ floor image failed\n");
-	if (!game->img_wall) ft_printf("❌ wall image failed\n");
-	if (!game->img_player) ft_printf("❌ player image failed\n");
-	if (!game->img_exit) ft_printf("❌ exit image failed\n");
-	if (!game->img_collectible) ft_printf("❌ collectible image failed\n");			
 	while (y < game->height)
 	{
 		x = 0;
 		while (x < game->width)
 		{
-			char tile = game->map[y][x];
-			void *img = game->img_floor;
+			tile = game->map[y][x];
+			img = game->img_floor;
 			if (tile == '1')
 				img = game->img_wall;
 			else if (tile == 'P')
@@ -40,8 +35,6 @@ void	render_map(t_game *game)
 				img = game->img_collectible;
 			else if (tile == 'E')
 				img = game->img_exit;
-			else if (tile != '0')
-				ft_printf("⚠ Unknown tile '%c' at [%d][%d]\n", tile, y, x);
 			mlx_put_image_to_window(game->mlx, game->win, img, x * TILE_SIZE, y * TILE_SIZE);
 			x++;
 		}
@@ -49,12 +42,11 @@ void	render_map(t_game *game)
 	}
 }
 
-
 void	load_images(t_game *game)
 {
 	int	w;
 	int	h;
-	
+
 	game->img_floor = mlx_xpm_file_to_image(game->mlx, "./assets/floor.xpm", &w, &h);
 	game->img_wall = mlx_xpm_file_to_image(game->mlx, "./assets/wall.xpm", &w, &h);
 	game->img_player_down = mlx_xpm_file_to_image(game->mlx, "./assets/player.xpm", &w, &h);
@@ -63,7 +55,7 @@ void	load_images(t_game *game)
 	game->img_player_right = mlx_xpm_file_to_image(game->mlx, "./assets/player_r.xpm", &w, &h);
 	game->img_exit = mlx_xpm_file_to_image(game->mlx, "./assets/exit.xpm", &w, &h);
 	game->img_collectible = mlx_xpm_file_to_image(game->mlx, "./assets/star.xpm", &w, &h);
-	game->img_player = game->img_player_down; // Default facing down	
+	game->img_player = game->img_player_down;
 }
 
 void	free_images(t_game *game)
@@ -87,9 +79,7 @@ void	start_game(char **map, int height, int width)
 	game.mlx = mlx_init();
 	if (!game.mlx)
 		return ;
-	ft_printf("mlx initialized\n");
 	game.win = mlx_new_window(game.mlx, w, h, "so_long");
-	ft_printf("window created\n");
 	if (!game.win)
 		return ;
 	game.map = map;
@@ -97,14 +87,11 @@ void	start_game(char **map, int height, int width)
 	game.height = height;
 	game.move_count = 0;
 	load_images(&game);
-	ft_printf("images loaded\n");
 	render_map(&game);
 	find_player_position(&game);
 	count_collectibles(&game);
-	ft_printf("map rendered\n");
 	mlx_key_hook(game.win, handle_keypress, &game);
 	mlx_hook(game.win, 17, 0, close_game, &game);
 	mlx_loop(game.mlx);
-	ft_printf("mlx loop started\n");
 	free_images(&game);
 }

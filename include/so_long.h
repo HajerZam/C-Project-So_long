@@ -50,7 +50,8 @@ typedef struct s_maplist
 	int		width;
 }	t_maplist;
 
-typedef struct s_game {
+typedef struct s_game
+{
 	void	*mlx;
 	void	*win;
 	void	*img_floor;
