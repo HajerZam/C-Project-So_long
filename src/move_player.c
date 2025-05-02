@@ -63,7 +63,7 @@ int	handle_player_destination(t_game *game, int new_x, int new_y)
 	{
 		if (game->collected == game->total_collectibles)
 		{
-			ft_printf("\033[32mYOU MADE IT WIZAAARD!\033[0m\n");
+			ft_printf("\033[1;35mYOU MADE IT WIZAAARD!\033[0m\n");
 			close_game(game);
 		}
 		else

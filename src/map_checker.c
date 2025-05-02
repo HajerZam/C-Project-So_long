@@ -33,25 +33,25 @@ int	check_border(char **map, int height, int width)
 	return (1);
 }
 
-int	append_line_to_map(char ***map, char *line, int *height, int *width)
+int	append_line_to_map(char ***map, char *line, int *h, int *w)
 {
 	char	**new_map;
 	char	*dup_line;
 
-	if (*width == -1)
-		*width = ft_strlen(line);
-	else if ((int)ft_strlen(line) != *width)
+	if (*w == -1)
+		*w = ft_strlen(line);
+	else if ((int)ft_strlen(line) != *w)
 		return (error("Map not rectangular, YOU FOOL!!"), 0);
-	new_map = realloc(*map, sizeof(char *) * (*height + 2));
+	new_map = realloc(*map, sizeof(char *) * (*h + 2));
 	if (!new_map)
 		return (error("Memory allocation failed, YOU FOOL!!"), 0);
 	dup_line = ft_strdup(line);
 	if (!dup_line)
 		return (error("Line duplication failed, YOU FOOL!!"), 0);
-	new_map[*height] = dup_line;
-	new_map[*height + 1] = NULL;
+	new_map[*h] = dup_line;
+	new_map[*h + 1] = NULL;
 	*map = new_map;
-	(*height)++;
+	(*h)++;
 	return (1);
 }
 

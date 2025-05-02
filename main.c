@@ -13,7 +13,7 @@
 #include "include/so_long.h"
 #include <stdio.h>
 
-int	check_map(char *file, char ***out_map, int *out_height, int *out_width)
+int	check_map(char *file, char ***out_map, int *out_h, int *out_w)
 {
 	int		fd;
 	char	**map;
@@ -32,8 +32,8 @@ int	check_map(char *file, char ***out_map, int *out_height, int *out_width)
 	if (!validate_loaded_map(map, height, width))
 		return (0);
 	*out_map = map;
-	*out_height = height;
-	*out_width = width;
+	*out_h = height;
+	*out_w = width;
 	return (1);
 }
 
