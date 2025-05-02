@@ -3,21 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   mini_graphic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/25 15:04:08 by halzamma          #+#    #+#             */
+/*   Updated: 2025/05/02 18:37:35 by halzamma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_graphic.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: halzamma <halzamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:04:08 by halzamma          #+#    #+#             */
-/*   Updated: 2025/05/02 18:24:13 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/05/02 18:45:00 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	render_map(t_game *game)
+static void	draw_tile(t_game *game, int x, int y)
 {
-	int		y;
-	int		x;
 	char	tile;
 	void	*img;
+
+	tile = game->map[y][x];
+	img = game->img_floor;
+	if (tile == '1')
+		img = game->img_wall;
+	else if (tile == 'P')
+		img = game->img_player;
+	else if (tile == 'C')
+		img = game->img_collectible;
+	else if (tile == 'E')
+		img = game->img_exit;
+	mlx_put_image_to_window(game->mlx, game->win, img,
+		x * TILE_SIZE, y * TILE_SIZE);
+}
+
+void	render_map(t_game *game)
+{
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < game->height)
@@ -25,17 +54,7 @@ void	render_map(t_game *game)
 		x = 0;
 		while (x < game->width)
 		{
-			tile = game->map[y][x];
-			img = game->img_floor;
-			if (tile == '1')
-				img = game->img_wall;
-			else if (tile == 'P')
-				img = game->img_player;
-			else if (tile == 'C')
-				img = game->img_collectible;
-			else if (tile == 'E')
-				img = game->img_exit;
-			mlx_put_image_to_window(game->mlx, game->win, img, x * TILE_SIZE, y * TILE_SIZE);
+			draw_tile(game, x, y);
 			x++;
 		}
 		y++;
@@ -47,14 +66,22 @@ void	load_images(t_game *game)
 	int	w;
 	int	h;
 
-	game->img_floor = mlx_xpm_file_to_image(game->mlx, "./assets/floor.xpm", &w, &h);
-	game->img_wall = mlx_xpm_file_to_image(game->mlx, "./assets/wall.xpm", &w, &h);
-	game->img_player_down = mlx_xpm_file_to_image(game->mlx, "./assets/player.xpm", &w, &h);
-	game->img_player_up = mlx_xpm_file_to_image(game->mlx, "./assets/player_up.xpm", &w, &h);
-	game->img_player_left = mlx_xpm_file_to_image(game->mlx, "./assets/player_l.xpm", &w, &h);
-	game->img_player_right = mlx_xpm_file_to_image(game->mlx, "./assets/player_r.xpm", &w, &h);
-	game->img_exit = mlx_xpm_file_to_image(game->mlx, "./assets/exit.xpm", &w, &h);
-	game->img_collectible = mlx_xpm_file_to_image(game->mlx, "./assets/star.xpm", &w, &h);
+	game->img_floor = mlx_xpm_file_to_image(game->mlx,
+			"./assets/floor.xpm", &w, &h);
+	game->img_wall = mlx_xpm_file_to_image(game->mlx,
+			"./assets/wall.xpm", &w, &h);
+	game->img_player_down = mlx_xpm_file_to_image(game->mlx,
+			"./assets/player.xpm", &w, &h);
+	game->img_player_up = mlx_xpm_file_to_image(game->mlx,
+			"./assets/player_up.xpm", &w, &h);
+	game->img_player_left = mlx_xpm_file_to_image(game->mlx,
+			"./assets/player_l.xpm", &w, &h);
+	game->img_player_right = mlx_xpm_file_to_image(game->mlx,
+			"./assets/player_r.xpm", &w, &h);
+	game->img_exit = mlx_xpm_file_to_image(game->mlx,
+			"./assets/exit.xpm", &w, &h);
+	game->img_collectible = mlx_xpm_file_to_image(game->mlx,
+			"./assets/star.xpm", &w, &h);
 	game->img_player = game->img_player_down;
 }
 
@@ -70,17 +97,9 @@ void	free_images(t_game *game)
 void	start_game(char **map, int height, int width)
 {
 	t_game	game;
-	int		w;
-	int		h;
 
-	w = width * TILE_SIZE;
-	h = height * TILE_SIZE;
 	ft_printf("starting game....\n");
-	game.mlx = mlx_init();
-	if (!game.mlx)
-		return ;
-	game.win = mlx_new_window(game.mlx, w, h, "so_long");
-	if (!game.win)
+	if (!init_window(&game, width, height))
 		return ;
 	game.map = map;
 	game.width = width;

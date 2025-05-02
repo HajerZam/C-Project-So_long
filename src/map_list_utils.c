@@ -26,3 +26,19 @@ t_maplist	*read_map_as_linked_list(int fd)
 		return (NULL);
 	return (map);
 }
+
+int	init_window(t_game *game, int width, int height)
+{
+	int	w;
+	int	h;
+
+	w = width * TILE_SIZE;
+	h = height * TILE_SIZE;
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		return (0);
+	game->win = mlx_new_window(game->mlx, w, h, "so_long");
+	if (!game->win)
+		return (0);
+	return (1);
+}

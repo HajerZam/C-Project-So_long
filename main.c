@@ -45,18 +45,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 || !ft_strnstr(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4))
 	{
-		ft_printf("\033[31mError: Invalid argument. Expected a .ber file.\033[0m\n");
+		error("Error: Invalid! I expected a .ber file >:(");
 		return (1);
 	}
 	else if (check_map(argv[1], &map, &height, &width))
-	{
-		ft_printf("\033[32m✔ Map is valid!\033[0m\nDimensions: %dx%d\n", width, height);
 		start_game(map, height, width);
-	}
 	else
-	{
-		ft_printf("\033[31m✘ Map is invalid.\033[0m\n");
 		return (1);
-	}
 	return (0);
 }
