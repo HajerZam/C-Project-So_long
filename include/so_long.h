@@ -104,6 +104,8 @@ void		count_collectibles(t_game *game);
 int			handle_keypress(int keycode, t_game *game);
 void		move_player(t_game *game, int dx, int dy);
 int			close_game(t_game *game);
+void		cleanup_game(t_game *game);
+void		init_game_struct(t_game *game, char **map, int h, int w);
 
 
 

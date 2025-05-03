@@ -3,21 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   move_player_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halzamma <halzamma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 18:18:27 by halzamma          #+#    #+#             */
-/*   Updated: 2025/05/02 18:19:44 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/05/03 15:51:32 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	close_game(t_game *game)
+void	init_game_struct(t_game *game, char **map, int h, int w)
 {
-	free_images(game);
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
-	return (0);
+	game->map = map;
+	game->width = w;
+	game->height = h;
+	game->move_count = 0;
+	game->mlx = NULL;
+	game->win = NULL;
+	game->img_floor = NULL;
+	game->img_wall = NULL;
+	game->img_player = NULL;
+	game->img_player_down = NULL;
+	game->img_player_up = NULL;
+	game->img_player_left = NULL;
+	game->img_player_right = NULL;
+	game->img_exit = NULL;
+	game->img_collectible = NULL;
 }
 
 int	handle_keypress(int keycode, t_game *game)

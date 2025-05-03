@@ -6,7 +6,7 @@
 /*   By: halzamma <halzamma@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:04:08 by halzamma          #+#    #+#             */
-/*   Updated: 2025/05/02 18:37:35 by halzamma         ###   ########.fr       */
+/*   Updated: 2025/05/03 15:52:47 by halzamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	load_images(t_game *game)
 	int	w;
 	int	h;
 
+	if (!game->mlx)
+		return ;
 	game->img_floor = mlx_xpm_file_to_image(game->mlx,
 			"./assets/floor.xpm", &w, &h);
 	game->img_wall = mlx_xpm_file_to_image(game->mlx,
@@ -85,22 +87,17 @@ void	load_images(t_game *game)
 	game->img_player = game->img_player_down;
 }
 
-void	free_images(t_game *game)
-{
-	mlx_destroy_image(game->mlx, game->img_floor);
-	mlx_destroy_image(game->mlx, game->img_wall);
-	mlx_destroy_image(game->mlx, game->img_player);
-	mlx_destroy_image(game->mlx, game->img_exit);
-	mlx_destroy_image(game->mlx, game->img_collectible);
-}
-
 void	start_game(char **map, int height, int width)
 {
 	t_game	game;
 
 	ft_printf("starting game....\n");
+	init_game_struct(&game, map, height, width);
 	if (!init_window(&game, width, height))
+	{
+		cleanup_game(&game);
 		return ;
+	}
 	game.map = map;
 	game.width = width;
 	game.height = height;

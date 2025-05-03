@@ -22,7 +22,7 @@ int	check_map(char *file, char ***out_map, int *out_h, int *out_w)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (perror("Error opening file"), 0);
+		return (perror("Error opening file... how peculiar..."), 0);
 	if (!read_map_lines(fd, &map, &width, &height))
 	{
 		close(fd);
