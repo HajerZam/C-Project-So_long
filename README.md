@@ -1,157 +1,222 @@
-# C-Project-So_long
-My seventh project in 42 common core (≖_≖ ) good GOD …the horrors I witnessed.
+<h1 align="center">🎮 C-Project: so_long</h1>
 
-## 🧠 Main Concepts to Learn & Understand
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-C-blue.svg">
+  <img src="https://img.shields.io/badge/42-Common%20Core-critical">
+</p>
 
-### 1. **MiniLibX Basics**
-
-the graphic library needed for the three rank 2 graphical project (so_long, FdF, Fract-ol).
-
-- Creating a window
-- Drawing images (sprites)
-- Handling keyboard inputs
-- Closing the window properly
-
-### 2. **Map Parsing**
-
-- Read `.ber` files
-- Validate map format (rectangular, enclosed by walls)
-- Track key characters: `0`, `1`, `C`, `E`, `P`
-
-### 3. **Game Logic**
-
-- Move player with W/A/S/D
-- Block movement into walls
-- Pick up collectibles
-- Exit only when all collectibles are picked
-- Count and display moves
-
-### 4. **Pathfinding (Map Validation)**
-
-- Ensure there is a valid path from P → all C → E
-- DFS or BFS to check connectivity
-
-### 5. **Memory Management**
-
-- Handle malloc/free properly
-- No leaks allowed
-
-### 6. **Bonus Features**
-
-- Enemies (patrols that kill the player)
-- Sprites animations
-- On-screen movement counter
+<p align="center">
+  🧱 My 7th project in the 42 Common Core <br>
+  (≖_≖ ) good GOD …the horrors I witnessed.
+</p>
 
 ---
 
-## 🛠️ Project Plan: Step-by-Step Strategy
+## 🧠 What You’ll Learn
 
-### 🔹 Step 1: Setup
+- 💡 **MiniLibX**: Basic graphics in C (rendering, input, events)
+- 🗺️ **Map parsing**: Read & validate `.ber` maps
+- 🧍 **Game logic**: Move the player, collect items, reach the exit
+- 🧭 **Pathfinding**: Use DFS/BFS to validate solvability
+- 🧼 **Memory management**: Avoiding leaks like your life depends on it
+- 💀 **Bonus**: Enemies, animations, on-screen counters (for the brave)
 
-- ✅ Install **MiniLibX**
-- ✅ Prepare your **Makefile**
-- ✅ Create project structure:
+---
 
-```c
-so_long/
-├── src/
-├── include/┌ ft_printf.h
-│           ├ libft.h
-│           └ so_long.h
-├── assets/
-├── maps/
-├── lib/┌ minilibx-linux/
-│       ├ libft/
-│       └ ft_printf/
-├── Makefile
-└── main.c
+## 🎯 Project Goal
+
+Create a 2D tile-based game where a player:
+
+- Navigates a map using **WASD**
+- Collects all **C** (collectibles)
+- Reaches the **E** (exit) **only** when all C are collected
+- Avoids walking into **1** (walls)
+
+---
+
+## 🛠 Project Structure
+
 ```
 
-### 🔹 Step 2: Map Parsing
+so\_long/
+├── src/
+├── include/
+│   ├── so\_long.h
+│   ├── libft.h
+│   └── ft\_printf.h
+├── lib/
+│   ├── minilibx-linux/
+│   ├── libft/
+│   └── ft\_printf/
+├── assets/
+├── maps/
+├── main.c
+└── Makefile
 
-- ✅ Read `.ber` file line by line
-- ✅ Check characters validity
-- ✅ Ensure rectangular & enclosed map
-- ✅ Check for one `P`, one `E`, at least one `C`
-- ✅ Use DFS/BFS to verify valid paths
-
-### 🔹 Step 3: Graphics & Window
-
-- ✅ Open a window with MiniLibX
-- ✅ Display basic tiles: floor, wall, player, collectible, exit
-- ✅ Create a map renderer function
-
-### 🔹 Step 4: Player Movement
-
-- ✅ Handle W/A/S/D key input
-- ✅ Move only if target tile is not a wall
-- ✅ Pick up collectible if on `C`
-- ✅ Update move count
-
-### 🔹 Step 5: Game Rules
-
-- ✅ Allow exit only when all collectibles are taken
-- ✅ Print movement count to terminal
-
-### 🔹 Step 6: Handle Events
-
-- ✅ Handle ESC key
-- ✅ Handle window close (click X)
-- ✅ Free memory before exiting
-
-### 🔹 Step 7: Bonus (if time allowed)
-
-- 🔸 Add enemy patrol logic (with simple AI)
-- 🔸 Add basic sprite animation (e.g., alternating frames)
-- 🔸 Display move counter inside the game window
+````
 
 ---
 
-## 📚 Resources for Each Step
+## 🧩 Map Format (`.ber`)
 
-### 🎥 YouTube
+Maps are built from characters:
 
-- **MiniLibX Tutorials**
-    - [42School MiniLibX tutorial](https://www.youtube.com/watch?v=a1yD_lgDtmM)
-    - [Creating 2D Game using MiniLibX](https://www.youtube.com/watch?v=g5HEp2MxKtg)
+| Char | Meaning          |
+|------|------------------|
+| `1`  | Wall             |
+| `0`  | Empty/floor      |
+| `C`  | Collectible      |
+| `E`  | Exit             |
+| `P`  | Player start     |
 
-### 📘 GitBooks / Blogs
+✅ Must be rectangular  
+✅ Enclosed by walls  
+✅ 1 player `P`, 1 exit `E`, at least 1 `C`  
+✅ All collectibles and exit must be reachable
 
-- MiniLibX Explained
-- Pathfinding in C (DFS/BFS)
-- [42 Game Tutorials & Patterns](https://github.com/0xAliK/42-So_long)
+---
 
-### 💻 GitHub Repos
+## 🕹 Controls
 
-- 🧠 **Good starter template**:
-    
-    https://github.com/ayoub0x1/so_long
-    
-- 📦 **MiniLibX Example**:
-    
-    https://github.com/42Paris/minilibx-linux
-    
-- 🧪 **Testing map parser**:
-    
-    [GitHub - Nuno-Jesus/so_long_invalidator: Small map validator for 42 School so_long project](https://github.com/Nuno-Jesus/so_long_invalidator.git)
-    
+- `W` → Move up
+- `A` → Move left
+- `S` → Move down
+- `D` → Move right
+- `ESC` → Quit game
 
-### 🎨 Assets
+---
 
-ME!! I am a digital illustrator ☆ﾟ°˖* ᕕ( ᐛ )ᕗ buuuuut for you dear reader :
+## 🚶 Game Flow
+
+- Render map to window
+- Capture keypress events
+- Move player (check walls)
+- Pick up collectibles
+- Only allow exit when all `C` are collected
+- Track and display **move count**
+
+---
+
+## 🔄 Map Validation (DFS/BFS)
+
+Check that all collectibles and the exit can be reached from the player’s position.
+
+Common approach:
+1. Duplicate the map
+2. Use DFS/BFS to traverse from `P`
+3. Check if you reached all `C` and `E`
+
+---
+
+## 🎨 Assets
+
+You can use your own sprite art if you're a digital illustrator like yours truly (*chef’s kiss*), or get free assets here I guess 🙄 :
 
 - https://itch.io/game-assets/free/tag-sprites
-- [OpenGameArt](https://opengameart.org/)
+- https://opengameart.org/
+
+Make sure images are `.xpm` (MiniLibX requirement).
 
 ---
 
-## ✅ Checklist Before Submission
+## 🔧 Build & Run
 
-- [ ]  Map parsing is bulletproof (all rules checked)
-- [ ]  No memory leaks (test with Valgrind)
-- [ ]  ESC and window close work cleanly
-- [ ]  Movement works & displayed correctly
-- [ ]  Valid `.ber` maps work perfectly
-- [ ]  Error messages are clear and user-friendly
-- [ ]  Makefile with all rules
-- [ ]  Git repo up-to-date
+### 🧱 Requirements
+
+- Linux or WSL  
+- MiniLibX (included in repo)
+
+### 🏗 Compile
+
+```bash
+make
+````
+
+### ▶️ Run
+
+```bash
+./so_long maps/map1.ber
+```
+
+---
+
+## ✨ Bonus Ideas
+
+| Feature              | Status |
+| -------------------- | ------ |
+| 🧟 Enemy patrols     | ❓      |
+| 🎞️ Animations       | ❓      |
+| 🎯 In-window counter | ❓      |
+
+---
+
+## 🛠 Helpful Resources
+
+### 📺 YouTube
+
+* [MiniLibX Tutorial](https://www.youtube.com/watch?v=a1yD_lgDtmM)
+* [2D Game in MiniLibX](https://www.youtube.com/watch?v=g5HEp2MxKtg)
+
+### 📘 Guides
+
+* [so\_long explained](https://github.com/0xAliK/42-So_long)
+* [Map Validator Tool](https://github.com/Nuno-Jesus/so_long_invalidator.git)
+
+---
+
+## ✅ Pre-Submission Checklist
+
+* [ ] `.ber` map parsing is airtight
+* [ ] DFS/BFS path validation is solid
+* [ ] MiniLibX window displays correctly
+* [ ] Player movement works with WASD
+* [ ] Exit opens only after collecting all `C`
+* [ ] Terminal move counter prints correctly
+* [ ] No memory leaks (test with `valgrind`)
+* [ ] Clean `Makefile` with all rules
+* [ ] ESC and X button exit cleanly
+* [ ] Bonus features (if implemented) work bug-free
+* [ ] Git repo is clean, commented, and pushed
+
+---
+
+## 🧪 Example Map
+
+```
+11111
+1P0C1
+10001
+1C0E1
+11111
+```
+
+---
+
+## 🧹 Memory Management Tips
+
+```bash
+valgrind ./so_long maps/test.ber
+```
+
+Don’t forget:
+
+* Free the map array
+* Free textures and MLX pointers
+* Close window and destroy display
+
+---
+
+## 🧵 Closing Thoughts
+
+> “If you stare into the abyss of MiniLibX long enough, the abyss starts leaking memory.”
+
+Stay hydrated. Comment your code.
+And may your `.ber` files never segfault again.
+
+---
+
+<p align="center">
+Made with 💀, 🎮 and maybe some tears by your local wizard
+</p>
+
+---
